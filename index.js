@@ -4,10 +4,7 @@ require('dotenv').config()
 const yargs = require('yargs')
 const fs = require('fs')
 const path = require('path')
-const {
-	getReqOptions,
-	formatReqURL
-} = require('./utils')
+const { getReqOptions, formatReqURL } = require('./utils')
 
 const { toBeListeds, toBeUnListeds } = JSON.parse(
 	fs.readFileSync(path.join(__dirname, './urls.json'), 'utf8')
@@ -24,8 +21,7 @@ yargs
 		const reqs = toBeUnListeds.map((url) =>
 			fetch(formatReqURL(url), getReqOptions(1))
 		)
-		
-		await Promise.allSettled(reqs);
+
+		await Promise.allSettled(reqs)
 	})
 	.parse()
-
